@@ -1,0 +1,35 @@
+{
+  "name": "api_multas",
+  "version": "1.0.0",
+  "description": "API Rest para servir datos a la aplicación Multas SM",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "ejs": "^2.5.7",
+    "express": "^4.16.3",
+    "morgan": "^1.9.0",
+    "mysql": "^2.15.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gerarddavila/api_multas.git"
+  },
+  "keywords": [
+    "multas",
+    "js",
+    "node",
+    "express",
+    "api",
+    "mysql"
+  ],
+  "author": "UMG",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gerarddavila/api_multas/issues"
+  },
+  "homepage": "https://github.com/Gerarddavila/api_multas#readme"
+}
