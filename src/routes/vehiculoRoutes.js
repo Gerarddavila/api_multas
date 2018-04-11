@@ -8,7 +8,7 @@ module.exports = function (app) {
   });
 
   app.post('/vehiculo', (req, res) => {
-    //console.log(req, body);
+  
     const vehiculoData = {
       id:null,
       no_multa:req.body.no_multa,
@@ -18,7 +18,7 @@ module.exports = function (app) {
       marca:req.body.marca,
       color:req.body.color
     };
-  //});
+
   Vehiculo.insertVehiculo(vehiculoData, (err, data) => {
   if (data && data.insertId) {
     console.log(data);
