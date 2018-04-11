@@ -52,7 +52,7 @@ app.put('/privilegios/:id', (req, res) => {
 
 
 app.delete('/privilegios/:id', (req, res) => {
-  Privilegios.deletePrivilegiosr(req.params.id, (err, data) => {
+  Privilegios.deletePrivilegios(req.params.id, (err, data) => {
 
     if (data && data.msg === 'Eliminado' || data.msg ==='No Existe') {
 res.json ({
