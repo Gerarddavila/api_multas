@@ -1,14 +1,13 @@
 const Vehiculo = require('../models/vehiculo');
 module.exports = function (app) {
   app.get('/vehiculo', (req, res) => {
-    //res.json([]);
-    Vehiculo.getVehiculo((err, data) => {
+      Vehiculo.getVehiculo((err, data) => {
       res.status(200).json(data);
     });
   });
 
   app.post('/vehiculo', (req, res) => {
-  
+
     const vehiculoData = {
       id:null,
       no_multa:req.body.no_multa,
@@ -39,7 +38,12 @@ module.exports = function (app) {
 app.put('/vehiculo/:id', (req, res) => {
   const vehiculoData = {
   id: req.params.id,
-  vehiculo: req.body.vehiculo
+  no_multa:req.body.no_multa,
+  no_placa:req.body.no_placa,
+  no_tarjeta_cir:req.body.no_tarjeta_cir,
+  tipo_vehiculo:req.body.tipo_vehiculo,
+  marca:req.body.marca,
+  color:req.body.color
   };
 
   Vehiculo.updateVehiculo(vehiculoData, (err, data) =>{
