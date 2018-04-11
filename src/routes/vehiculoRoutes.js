@@ -11,7 +11,12 @@ module.exports = function (app) {
     //console.log(req, body);
     const vehiculoData = {
       id:null,
-      vehiculo:req.body.vehiculo
+      no_multa:req.body.no_multa,
+      no_placa:req.body.no_placa,
+      no_tarjeta_cir:req.body.no_tarjeta_cir,
+      tipo_vehiculo:req.body.tipo_vehiculo,
+      marca:req.body.marca,
+      color:req.body.color
     };
   //});
   Vehiculo.insertVehiculo(vehiculoData, (err, data) => {
