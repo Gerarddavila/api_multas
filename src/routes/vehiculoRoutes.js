@@ -52,7 +52,7 @@ app.put('/vehiculo/:id', (req, res) => {
 
 
 app.delete('/vehiculo/:id', (req, res) => {
-  Vehiculo.deleteVehiculor(req.params.id, (err, data) => {
+  Vehiculo.deleteVehiculo(req.params.id, (err, data) => {
 
     if (data && data.msg === 'Eliminado' || data.msg ==='No Existe') {
 res.json ({
