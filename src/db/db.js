@@ -1,10 +1,10 @@
 const mysql = require('mysql');
 
 var connection = mysql.createConnection({
-  host: 'apimult.heliohost.org',
-  user: 'apimult_user',
-  password: 'UsuarioBD2018',
-  database: 'apimult_as',
+  host: 'umgsm.com',
+  user: 'apimultas_user',
+  password: 'UserMultasDB2018',
+  database: 'apimultas',
   port: '3306'
 });
 
