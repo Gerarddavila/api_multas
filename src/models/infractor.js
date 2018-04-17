@@ -1,18 +1,10 @@
-const mysql = require('mysql');
-
-connection = mysql.createConnection({
-  host: 'apimult.heliohost.org',
-  user: 'apimult_user',
-  password: 'UsuarioBD2018',
-  database: 'apimult_as',
-  //port: '3306'
-});
+const database = require ('../db/db');
 
 let infractorModel = {};
 
 infractorModel.getInfractor = (callback) => {
-  if (connection) {
-    connection.query('SELECT * FROM datos_infractor ORDER BY id',
+  if (database.connection) {
+    database.connection.query('SELECT * FROM datos_infractor ORDER BY id',
     (err, rows) => {
         if (err) {
         throw err;
@@ -25,8 +17,8 @@ infractorModel.getInfractor = (callback) => {
 };
 
 infractorModel.insertInfractor = (infractorData, callback) => {
-  if (connection){
-    connection.query('INSERT INTO datos_infractor SET ?', infractorData,
+  if (database.connection){
+    database.connection.query('INSERT INTO datos_infractor SET ?', infractorData,
 (err, result) => {
   if (err)
   {
@@ -42,20 +34,20 @@ infractorModel.insertInfractor = (infractorData, callback) => {
 };
 
 infractorModel.updateInfractor = (infractorData, callback) => {
-  if (connection) {
+  if (database.connection) {
 const sql = `UPDATE datos_infractor SET
-nombres = ${connection.escape(infractorData.nombres)},
-apellidos = ${connection.escape(infractorData.apellidos)},
-conductor_ausente = ${connection.escape(infractorData.conductor_ausente)},
-genero = ${connection.escape(infractorData.genero)},
-no_licencia = ${connection.escape(infractorData.no_licencia)},
-tipo_licencia = ${connection.escape(infractorData.tipo_licencia)},
-no_documento_dpi = ${connection.escape(infractorData.no_documento_dpi)},
-domicilio = ${connection.escape(infractorData.domicilio)},
-datos_vehiculo_id = ${connection.escape(infractorData.datos_vehiculo_id)}
-WHERE id= ${connection.escape(infractorData.id)}
+nombres = ${database.connection.escape(infractorData.nombres)},
+apellidos = ${database.connection.escape(infractorData.apellidos)},
+conductor_ausente = ${database.connection.escape(infractorData.conductor_ausente)},
+genero = ${database.connection.escape(infractorData.genero)},
+no_licencia = ${database.connection.escape(infractorData.no_licencia)},
+tipo_licencia = ${database.connection.escape(infractorData.tipo_licencia)},
+no_documento_dpi = ${database.connection.escape(infractorData.no_documento_dpi)},
+domicilio = ${database.connection.escape(infractorData.domicilio)},
+datos_vehiculo_id = ${database.connection.escape(infractorData.datos_vehiculo_id)}
+WHERE id= ${database.connection.escape(infractorData.id)}
 `
-connection.query(sql, (err, result) => {
+database.connection.query(sql, (err, result) => {
   if (err)
   {
     throw err;
@@ -71,12 +63,12 @@ connection.query(sql, (err, result) => {
 
 
 infractorModel.deleteInfractor = (id, callback)=>{
-  if (connection) {
-    let sql = `SELECT * FROM datos_infractor WHERE id = ${connection.escape(id)}`;
-    connection.query(sql, (err, row)=> {
+  if (database.connection) {
+    let sql = `SELECT * FROM datos_infractor WHERE id = ${database.connection.escape(id)}`;
+    database.connection.query(sql, (err, row)=> {
       if (row) {
         let sql = `DELETE FROM datos_infractor WHERE id = ${id}`;
-        connection.query(sql, (err, result) => {
+        database.connection.query(sql, (err, result) => {
 if (err) {
   throw err;
 }else {

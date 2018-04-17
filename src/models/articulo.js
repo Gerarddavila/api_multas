@@ -1,19 +1,13 @@
 //--------------------Configuracion de la conexion--------------------------------
-const mysql = require ('mysql');
-connection = mysql.createConnection({
-host: 'apimult.heliohost.org',
-user: 'apimult_user',
-password: 'UsuarioBD2018',
-database: 'apimult_as',
-port:'3306'
-});
+const database = require ('../db/db');
+
 //--------------------Metodo para obtener datos --------------------------------
 let ArticuloModel = {};
 ArticuloModel.getArticulo = (callback) => {
 
-  if (connection)
+  if (database.connection)
   {
-    connection.query ('SELECT *  FROM articulo_infringido',
+    database.connection.query ('SELECT *  FROM articulo_infringido',
   (err,rows) => {
 if (err) {
 throw err;
@@ -29,8 +23,8 @@ else {
 };
 //-----------------Metodo para enviar datos-------------------------------------
 ArticuloModel.insertArticulo = (ArticuloData, callback) => {
-  if (connection){
-    connection.query('INSERT INTO articulo_infringido SET ?', ArticuloData,
+  if (database.connection){
+    database.connection.query('INSERT INTO articulo_infringido SET ?', ArticuloData,
 (err, result) => {
   if (err)
   {
@@ -46,17 +40,17 @@ ArticuloModel.insertArticulo = (ArticuloData, callback) => {
 };
 //------------------Metodo para actualiar datos---------------------------------
 ArticuloModel.updateArticulo = (ArticuloData, callback) => {
-  if (connection) {
+  if (database.connection) {
 const sql = `UPDATE articulo_infringido SET
-no_articulo = ${connection.escape(ArticuloData.no_articulo)},
-descripcion_articulo = ${connection.escape(ArticuloData.descripcion_articulo)},
-base_legal = ${connection.escape(ArticuloData.base_legal)},
-monto_Articulo  = ${connection.escape(ArticuloData.monto_Articulo)},
-datos_vehiculo_id = ${connection.escape(ArticuloData.datos_vehiculo_id)},
-datos_Articulo_id  = ${connection.escape(ArticuloData.datos_Articulo_id)}
-WHERE id= ${connection.escape(ArticuloData.id)}
+no_articulo = ${database.connection.escape(ArticuloData.no_articulo)},
+descripcion_articulo = ${database.connection.escape(ArticuloData.descripcion_articulo)},
+base_legal = ${database.connection.escape(ArticuloData.base_legal)},
+monto_Articulo  = ${database.connection.escape(ArticuloData.monto_Articulo)},
+datos_vehiculo_id = ${database.connection.escape(ArticuloData.datos_vehiculo_id)},
+datos_Articulo_id  = ${database.connection.escape(ArticuloData.datos_Articulo_id)}
+WHERE id= ${database.connection.escape(ArticuloData.id)}
 `
-connection.query(sql, (err, result) => {
+database.connection.query(sql, (err, result) => {
   if (err)
   {
     throw err;
@@ -71,12 +65,12 @@ connection.query(sql, (err, result) => {
 };
 //-------------------------Metodo de eliminacion--------------------------------
 ArticuloModel.deleteArticulo = (id, callback)=>{
-  if (connection) {
-    let sql = `SELECT * FROM articulo_infringido WHERE id = ${connection.escape(id)}`;
-    connection.query(sql, (err, row)=> {
+  if (database.connection) {
+    let sql = `SELECT * FROM articulo_infringido WHERE id = ${database.connection.escape(id)}`;
+    database.connection.query(sql, (err, row)=> {
       if (row) {
         let sql = `DELETE FROM articulo_infringido WHERE id = ${id}`;
-        connection.query(sql, (err, result) => {
+        database.connection.query(sql, (err, result) => {
 if (err) {
   throw err;
 }else {

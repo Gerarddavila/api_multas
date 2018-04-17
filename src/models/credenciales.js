@@ -1,18 +1,10 @@
-const mysql = require('mysql');
-
-connection = mysql.createConnection({
-  host: 'apimult.heliohost.org',
-  user: 'apimult_user',
-  password: 'UsuarioBD2018',
-  database: 'apimult_as',
-  port: '3306'
-});
+const database = require ('../db/db');
 
 let credencialesModel = {};
 
 credencialesModel.getCredenciales = (callback) => {
-  if (connection) {
-    connection.query('SELECT * FROM credenciales ORDER BY id',
+  if (database.connection) {
+    database.connection.query('SELECT * FROM credenciales ORDER BY id',
     (err, rows) => {
       if (err) {
         throw err;
@@ -25,8 +17,8 @@ credencialesModel.getCredenciales = (callback) => {
 };
 
 credencialesModel.insertCredenciales = (credencialesData, callback) => {
-  if (connection){
-    connection.query('INSERT INTO credenciales SET ?', credencialesData,
+  if (database.connection){
+    database.connection.query('INSERT INTO credenciales SET ?', credencialesData,
 (err, result) => {
   if (err)
   {
@@ -42,14 +34,14 @@ credencialesModel.insertCredenciales = (credencialesData, callback) => {
 };
 
 credencialesModel.updateCredenciales = (credencialesData, callback) => {
-  if (connection) {
+  if (database.connection) {
 const sql = `UPDATE credenciales SET
-usuario = ${connection.escape(credencialesData.usuario)},
-password = ${connection.escape(credencialesData.password)},
-privilegios_id = ${connection.escape(credencialesData.privilegios_id)}
-WHERE id= ${connection.escape(credencialesData.id)}
+usuario = ${database.connection.escape(credencialesData.usuario)},
+password = ${database.connection.escape(credencialesData.password)},
+privilegios_id = ${database.connection.escape(credencialesData.privilegios_id)}
+WHERE id= ${database.connection.escape(credencialesData.id)}
 `
-connection.query(sql, (err, result) => {
+database.connection.query(sql, (err, result) => {
   if (err)
   {
     throw err;
@@ -65,12 +57,12 @@ connection.query(sql, (err, result) => {
 
 
 credencialesModel.deleteCredenciales = (id, callback)=>{
-  if (connection) {
-    let sql = `SELECT * FROM credenciales WHERE id = ${connection.escape(id)}`;
-    connection.query(sql, (err, row)=> {
+  if (database.connection) {
+    let sql = `SELECT * FROM credenciales WHERE id = ${database.connection.escape(id)}`;
+    database.connection.query(sql, (err, row)=> {
       if (row) {
         let sql = `DELETE FROM credenciales WHERE id = ${id}`;
-        connection.query(sql, (err, result) => {
+        database.connection.query(sql, (err, result) => {
 if (err) {
   throw err;
 }else {

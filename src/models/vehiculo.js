@@ -1,18 +1,10 @@
-const mysql = require('mysql');
-
-connection = mysql.createConnection({
-  host: 'apimult.heliohost.org',
-  user: 'apimult_user',
-  password: 'UsuarioBD2018',
-  database: 'apimult_as',
-  port: '3306'
-});
+const database = require ('../db/db');
 
 let vehiculoModel = {};
 
 vehiculoModel.getVehiculo = (callback) => {
-  if (connection) {
-    connection.query('SELECT * FROM datos_vehiculo ORDER BY id',
+  if (database.connection) {
+    database.connection.query('SELECT * FROM datos_vehiculo ORDER BY id',
     (err, rows) => {
       if (err) {
         throw err;
@@ -25,8 +17,8 @@ vehiculoModel.getVehiculo = (callback) => {
 };
 
 vehiculoModel.getVehiculoInfractor = (vehiculoData, callback) => {
-  if (connection) {
-    connection.query(` SELECT * FROM datos_vehiculo INNER JOIN datos_infractor ON datos_infractor.id = datos_vehiculo.id WHERE datos_vehiculo.id = ${connection.escape(vehiculoData.id)} ;`,
+  if (database.connection) {
+    database.connection.query(` SELECT * FROM datos_vehiculo INNER JOIN datos_infractor ON datos_infractor.id = datos_vehiculo.id WHERE datos_vehiculo.id = ${database.connection.escape(vehiculoData.id)} ;`,
     (err, rows) => {
       if (err) {
         throw err;
@@ -40,8 +32,8 @@ vehiculoModel.getVehiculoInfractor = (vehiculoData, callback) => {
 
 
 vehiculoModel.insertVehiculo = (vehiculoData, callback) => {
-  if (connection){
-    connection.query('INSERT INTO datos_vehiculo SET ?', vehiculoData,
+  if (database.connection){
+    database.connection.query('INSERT INTO datos_vehiculo SET ?', vehiculoData,
 (err, result) => {
   if (err)
   {
@@ -57,16 +49,16 @@ vehiculoModel.insertVehiculo = (vehiculoData, callback) => {
 };
 
 vehiculoModel.updateVehiculo = (vehiculoData, callback) => {
-  if (connection) {
+  if (database.connection) {
 const sql = `UPDATE datos_vehiculo SET
-no_placa = ${connection.escape(vehiculoData.no_placa)},
-no_multa = ${connection.escape(vehiculoData.no_multa)},
-no_tarjeta_cir = ${connection.escape(vehiculoData.no_tarjeta_cir)},
-tipo_vehiculo = ${connection.escape(vehiculoData.tipo_vehiculo)},
-marca = ${connection.escape(vehiculoData.marca)},
-color = ${connection.escape(vehiculoData.color)}
-WHERE id= ${connection.escape(vehiculoData.id)} `
-connection.query(sql, (err, result) => {
+no_placa = ${database.connection.escape(vehiculoData.no_placa)},
+no_multa = ${database.connection.escape(vehiculoData.no_multa)},
+no_tarjeta_cir = ${database.connection.escape(vehiculoData.no_tarjeta_cir)},
+tipo_vehiculo = ${database.connection.escape(vehiculoData.tipo_vehiculo)},
+marca = ${database.connection.escape(vehiculoData.marca)},
+color = ${database.connection.escape(vehiculoData.color)}
+WHERE id= ${database.connection.escape(vehiculoData.id)} `
+database.connection.query(sql, (err, result) => {
   if (err)
   {
     throw err;
@@ -82,12 +74,12 @@ connection.query(sql, (err, result) => {
 
 
 vehiculoModel.deleteVehiculo = (id, callback)=>{
-  if (connection) {
-    let sql = `SELECT * FROM datos_vehiculo WHERE id = ${connection.escape(id)}`;
-    connection.query(sql, (err, row)=> {
+  if (database.connection) {
+    let sql = `SELECT * FROM datos_vehiculo WHERE id = ${database.connection.escape(id)}`;
+    database.connection.query(sql, (err, row)=> {
       if (row) {
         let sql = `DELETE FROM datos_vehiculo WHERE id = ${id}`;
-        connection.query(sql, (err, result) => {
+        database.connection.query(sql, (err, result) => {
 if (err) {
   throw err;
 }else {

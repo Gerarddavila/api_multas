@@ -1,19 +1,11 @@
-const mysql = require ('mysql');
-connection = mysql.createConnection({
-host: 'apimult.heliohost.org',
-user: 'apimult_user',
-password: 'UsuarioBD2018',
-database: 'apimult_as',
-port:'3306'
+const database = require ('../db/db')
 
-
-});
 let infraccionModel = {};
 infraccionModel.getInfraccion = (callback) => {
 
-  if (connection)
+  if (database.connection)
   {
-    connection.query ('SELECT *  FROM datos_infraccion ORDER BY id',
+    database.connection.query ('SELECT *  FROM datos_infraccion ORDER BY id',
   (err,rows) => {
 if (err) {
 throw err;
@@ -28,8 +20,8 @@ else {
   }
 };
 infraccionModel.insertInfraccion = (infraccionData, callback) => {
-  if (connection){
-    connection.query('INSERT INTO datos_infraccion SET ?', infraccionData,
+  if (database.connection){
+    database.connection.query('INSERT INTO datos_infraccion SET ?', infraccionData,
 (err, result) => {
   if (err)
   {
@@ -45,15 +37,15 @@ infraccionModel.insertInfraccion = (infraccionData, callback) => {
 };
 
 infraccionModel.updateInfraccion = (infraccionData, callback) => {
-  if (connection) {
+  if (database.connection) {
 const sql = `UPDATE datos_infraccion SET
-lugar_infraccion = ${connection.escape(infraccionData.lugar_infraccion)},
-fecha_infraccion = ${connection.escape(infraccionData.fecha_infraccion)},
-hora_infraccion = ${connection.escape(infraccionData.hora_infraccion)},
-datos_vehiculo_id = ${connection.escape(infraccionData.datos_vehiculo_id)}
-WHERE id= ${connection.escape(infraccionData.id)}
+lugar_infraccion = ${database.connection.escape(infraccionData.lugar_infraccion)},
+fecha_infraccion = ${database.connection.escape(infraccionData.fecha_infraccion)},
+hora_infraccion = ${database.connection.escape(infraccionData.hora_infraccion)},
+datos_vehiculo_id = ${database.connection.escape(infraccionData.datos_vehiculo_id)}
+WHERE id= ${database.connection.escape(infraccionData.id)}
 `
-connection.query(sql, (err, result) => {
+database.connection.query(sql, (err, result) => {
   if (err)
   {
     throw err;
@@ -69,12 +61,12 @@ connection.query(sql, (err, result) => {
 
 
 infraccionModel.deleteInfraccion = (id, callback)=>{
-  if (connection) {
-    let sql = `SELECT * FROM datos_infraccion WHERE id = ${connection.escape(id)}`;
-    connection.query(sql, (err, row)=> {
+  if (database.connection) {
+    let sql = `SELECT * FROM datos_infraccion WHERE id = ${database.connection.escape(id)}`;
+    database.connection.query(sql, (err, row)=> {
       if (row) {
         let sql = `DELETE FROM datos_infraccion WHERE id = ${id}`;
-        connection.query(sql, (err, result) => {
+        database.connection.query(sql, (err, result) => {
 if (err) {
   throw err;
 }else {

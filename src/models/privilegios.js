@@ -1,18 +1,10 @@
-const mysql = require('mysql');
-
-connection = mysql.createConnection({
-  host: 'apimult.heliohost.org',
-  user: 'apimult_user',
-  password: 'UsuarioBD2018',
-  database: 'apimult_as',
-  port: '3306'
-});
+const database = require ('../db/db');
 
 let privilegiosModel = {};
 
 privilegiosModel.getPrivilegios = (callback) => {
-  if (connection) {
-    connection.query('SELECT * FROM privilegios ORDER BY id',
+  if (database.connection) {
+    database.connection.query('SELECT * FROM privilegios ORDER BY id',
     (err, rows) => {
       if (err) {
         throw err;
@@ -25,8 +17,8 @@ privilegiosModel.getPrivilegios = (callback) => {
 };
 
 privilegiosModel.insertPrivilegios = (privilegiosData, callback) => {
-  if (connection){
-    connection.query('INSERT INTO privilegios SET ?', privilegiosData,
+  if (database.connection){
+    database.connection.query('INSERT INTO privilegios SET ?', privilegiosData,
 (err, result) => {
   if (err)
   {
@@ -42,12 +34,12 @@ privilegiosModel.insertPrivilegios = (privilegiosData, callback) => {
 };
 
 privilegiosModel.updatePrivilegios = (privilegiosData, callback) => {
-  if (connection) {
+  if (database.connection) {
 const sql = `UPDATE privilegios SET
-privilegio = ${connection.escape(privilegiosData.privilegio)}
-WHERE id= ${connection.escape(privilegiosData.id)}
+privilegio = ${database.connection.escape(privilegiosData.privilegio)}
+WHERE id= ${database.connection.escape(privilegiosData.id)}
 `
-connection.query(sql, (err, result) => {
+database.connection.query(sql, (err, result) => {
   if (err)
   {
     throw err;
@@ -63,12 +55,12 @@ connection.query(sql, (err, result) => {
 
 
 privilegiosModel.deletePrivilegios = (id, callback)=>{
-  if (connection) {
-    let sql = `SELECT * FROM privilegios WHERE id = ${connection.escape(id)}`;
-    connection.query(sql, (err, row)=> {
+  if (database.connection) {
+    let sql = `SELECT * FROM privilegios WHERE id = ${database.connection.escape(id)}`;
+    database.connection.query(sql, (err, row)=> {
       if (row) {
         let sql = `DELETE FROM privilegios WHERE id = ${id}`;
-        connection.query(sql, (err, result) => {
+        database.connection.query(sql, (err, result) => {
 if (err) {
   throw err;
 }else {
