@@ -24,6 +24,21 @@ vehiculoModel.getVehiculo = (callback) => {
   }
 };
 
+vehiculoModel.getVehiculoInfractor = (vehiculoData, callback) => {
+  if (connection) {
+    connection.query(` SELECT * FROM datos_vehiculo INNER JOIN datos_infractor ON datos_infractor.id = datos_vehiculo.id WHERE datos_vehiculo.id = ${connection.escape(vehiculoData.id)} ;`,
+    (err, rows) => {
+      if (err) {
+        throw err;
+      }else {
+        callback(null, rows);
+      }
+    }
+  )
+  }
+};
+
+
 vehiculoModel.insertVehiculo = (vehiculoData, callback) => {
   if (connection){
     connection.query('INSERT INTO datos_vehiculo SET ?', vehiculoData,

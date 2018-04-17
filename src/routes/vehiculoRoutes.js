@@ -1,7 +1,17 @@
 const Vehiculo = require('../models/vehiculo');
 module.exports = function (app) {
+
   app.get('/vehiculo', (req, res) => {
       Vehiculo.getVehiculo((err, data) => {
+      res.status(200).json(data);
+    });
+  });
+
+  app.get('/vehiculo/:id', (req, res) => {
+    const vehiculoData ={
+      id: req.params.id
+    };
+      Vehiculo.getVehiculoInfractor(vehiculoData,(err, data) => {        
       res.status(200).json(data);
     });
   });

@@ -23,6 +23,7 @@ require('./routes/credencialesRoutes') (app);
 require ('./routes/infraccionRoutes')(app);
 require('./routes/infractorRoutes')(app);
 require('./routes/vehiculoRoutes')(app);
+require('./routes/detalleRoutes')(app);
 
 
 app.listen(app.get('port'), () => {
