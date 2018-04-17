@@ -11,7 +11,7 @@ module.exports = function (app) {
     const vehiculoData ={
       id: req.params.id
     };
-      Vehiculo.getVehiculoInfractor(vehiculoData,(err, data) => {        
+      Vehiculo.getVehiculoIndividual(vehiculoData,(err, data) => {
       res.status(200).json(data);
     });
   });

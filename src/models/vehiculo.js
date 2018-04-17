@@ -16,9 +16,9 @@ vehiculoModel.getVehiculo = (callback) => {
   }
 };
 
-vehiculoModel.getVehiculoInfractor = (vehiculoData, callback) => {
+vehiculoModel.getVehiculoIndividual= (vehiculoData, callback) => {
   if (database.connection) {
-    database.connection.query(` SELECT * FROM datos_vehiculo INNER JOIN datos_infractor ON datos_infractor.id = datos_vehiculo.id WHERE datos_vehiculo.id = ${database.connection.escape(vehiculoData.id)} ;`,
+    database.connection.query(` SELECT * FROM datos_vehiculo WHERE id = ${database.connection.escape(vehiculoData.id)} ;`,
     (err, rows) => {
       if (err) {
         throw err;
