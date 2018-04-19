@@ -24,6 +24,7 @@ require ('./routes/infraccionRoutes')(app);
 require('./routes/infractorRoutes')(app);
 require('./routes/vehiculoRoutes')(app);
 require('./routes/detalleRoutes')(app);
+require('./routes/detallePlacaRoutes')(app);
 
 
 app.listen(app.get('port'), () => {

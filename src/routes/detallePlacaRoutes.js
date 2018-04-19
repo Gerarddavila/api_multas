@@ -1,8 +1,8 @@
-const Detalle = require('../models/placa');
+const Placa = require('../models/placa');
 module.exports = function (app) {
 
   app.get('/placa', (req, res) => {
-      Detalle.getPlaca((err, data) => {
+      Placa.getPlaca((err, data) => {
       res.status(200).json(data);
     });
   });
@@ -11,7 +11,7 @@ module.exports = function (app) {
     const placaData ={
       placa: req.params.placa
     };
-      Detalle.getPlacaIndividual(placaData,(err, data) => {
+      Placa.getPlacaIndividual(placaData,(err, data) => {
       res.status(200).json(data);
     });
   });
