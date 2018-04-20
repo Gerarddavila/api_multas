@@ -14,6 +14,7 @@ app.post('/infraccion', (req, res) => {
 const infraccionData = {
 id: null,
 lugar_infraccion:req.body.lugar_infraccion,
+municipio_infraccion:req.body.municipio_infraccion,
 fecha_infraccion:req.body.fecha_infraccion,
 hora_infraccion:req.body.hora_infraccion,
 datos_vehiculo_id:req.body.datos_vehiculo_id
@@ -41,6 +42,7 @@ app.put('/infraccion/:id', (req, res) => {
   const infraccionData = {
   id: req.params.id,
   lugar_infraccion: req.body.lugar_infraccion,
+  municipio_infraccion:req.body.municipio_infraccion,
   fecha_infraccion:req.body.fecha_infraccion,
   hora_infraccion:req.body.hora_infraccion,
   datos_vehiculo_id:req.body.datos_vehiculo_id
