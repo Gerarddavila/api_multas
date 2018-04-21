@@ -25,7 +25,7 @@ require('./routes/infractorRoutes')(app);
 require('./routes/vehiculoRoutes')(app);
 require('./routes/detalleRoutes')(app);
 require('./routes/detallePlacaRoutes')(app);
-
+require('./routes/topRoutes')(app);
 
 app.listen(app.get('port'), () => {
   console.log('server on port 3000');

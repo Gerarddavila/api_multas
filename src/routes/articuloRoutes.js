@@ -1,10 +1,10 @@
-const Articulo = require ('../models/articulo');
+const articulo = require ('../models/articulo');
 
 module.exports = function (app)
 {
 //-----------------------Obtener datos------------------------------------------
 app.get('/articulo', (req, res) => {
-Articulo.getArticulo((err, data) =>{
+articulo.getArticulo((err, data) =>{
   res.status(200).json(data);
 });
 
@@ -12,22 +12,22 @@ Articulo.getArticulo((err, data) =>{
 });
 //-------------------------Enviar de datos--------------------------------------
 app.post('/articulo', (req, res) => {
-const ArticuloData = {
+const articuloData = {
 id: null,
 no_articulo:req.body.no_articulo,
 descripcion_articulo:req.body.descripcion_articulo,
 base_legal:req.body.base_legal,
 monto_infraccion:req.body.monto_infraccion,
 datos_vehiculo_id:req.body.datos_vehiculo_id,
-datos_articulo_id:req.body.datos_articulo_id
+datos_infraccion_id:req.body.datos_infraccion_id
 
 };
-Articulo.insertArticulo(ArticuloData, (err, data) => {
+articulo.insertArticulo(articuloData, (err, data) => {
   if (data && data.insertId) {
     console.log(data);
   res.json ({
     success: true,
-    msg: 'Articulo Insertado',
+    msg: 'articulo Insertado',
     data:data
   })
 } else {
@@ -40,18 +40,18 @@ Articulo.insertArticulo(ArticuloData, (err, data) => {
 });
 //------------------------Actualizacion-----------------------------------------
 app.put('/articulo/:id', (req, res) => {
-  const ArticuloData = {
+  const articuloData = {
   id: req.params.id,
   no_articulo:req.body.no_articulo,
   descripcion_articulo:req.body.descripcion_articulo,
   base_legal:req.body.base_legal,
   monto_infraccion:req.body.monto_infraccion,
   datos_vehiculo_id:req.body.datos_vehiculo_id,
-  datos_articulo_id:req.body.datos_articulo_id
+  datos_infraccion_id:req.body.datos_infraccion_id
 
   };
 
-  Articulo.updateArticulo(ArticuloData, (err, data) =>{
+  articulo.updateArticulo(articuloData, (err, data) =>{
   if (data && data.msg) {
     res.json(data)
   }  else {
@@ -65,7 +65,7 @@ app.put('/articulo/:id', (req, res) => {
 });
 //------------------------Eliminacion-------------------------------------------
 app.delete('/articulo/:id', (req, res) => {
-  Articulo.deleteArticulo(req.params.id, (err, data) => {
+  articulo.deleteArticulo(req.params.id, (err, data) => {
 
     if (data && data.msg === 'deleted' || data.msg ==='not exists') {
 res.json ({
@@ -75,7 +75,7 @@ data
 })
 } else {
   res.status(500),json({
-    msg: 'Error Articulo no existe!'
+    msg: 'Error articulo no existe!'
   })
 }
   });

@@ -31,9 +31,6 @@ WHERE datos_vehiculo.no_placa = ${database.connection.escape(detalleData.placa)}
         callback(null, rows);
       }
     }
-  )
-  }
+  )}
 };
-
-
 module.exports = detalleModel;

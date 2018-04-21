@@ -2,8 +2,8 @@
 const database = require ('../db/db');
 
 //--------------------Metodo para obtener datos --------------------------------
-let ArticuloModel = {};
-ArticuloModel.getArticulo = (callback) => {
+let articuloModel = {};
+articuloModel.getArticulo = (callback) => {
 
   if (database.connection)
   {
@@ -22,7 +22,7 @@ else {
   }
 };
 //-----------------Metodo para enviar datos-------------------------------------
-ArticuloModel.insertArticulo = (ArticuloData, callback) => {
+articuloModel.insertArticulo = (ArticuloData, callback) => {
   if (database.connection){
     database.connection.query('INSERT INTO articulo_infringido SET ?', ArticuloData,
 (err, result) => {
@@ -39,15 +39,15 @@ ArticuloModel.insertArticulo = (ArticuloData, callback) => {
   }
 };
 //------------------Metodo para actualiar datos---------------------------------
-ArticuloModel.updateArticulo = (ArticuloData, callback) => {
+articuloModel.updateArticulo = (ArticuloData, callback) => {
   if (database.connection) {
 const sql = `UPDATE articulo_infringido SET
 no_articulo = ${database.connection.escape(ArticuloData.no_articulo)},
 descripcion_articulo = ${database.connection.escape(ArticuloData.descripcion_articulo)},
 base_legal = ${database.connection.escape(ArticuloData.base_legal)},
-monto_Articulo  = ${database.connection.escape(ArticuloData.monto_Articulo)},
+monto_infraccion  = ${database.connection.escape(ArticuloData.monto_Articulo)},
 datos_vehiculo_id = ${database.connection.escape(ArticuloData.datos_vehiculo_id)},
-datos_Articulo_id  = ${database.connection.escape(ArticuloData.datos_Articulo_id)}
+datos_infraccion_id  = ${database.connection.escape(ArticuloData.datos_infraccion_id)}
 WHERE id= ${database.connection.escape(ArticuloData.id)}
 `
 database.connection.query(sql, (err, result) => {
@@ -64,7 +64,7 @@ database.connection.query(sql, (err, result) => {
   }
 };
 //-------------------------Metodo de eliminacion--------------------------------
-ArticuloModel.deleteArticulo = (id, callback)=>{
+articuloModel.deleteArticulo = (id, callback)=>{
   if (database.connection) {
     let sql = `SELECT * FROM articulo_infringido WHERE id = ${database.connection.escape(id)}`;
     database.connection.query(sql, (err, row)=> {
@@ -89,4 +89,4 @@ if (err) {
     });
   }
 };
-module.exports = ArticuloModel;
+module.exports = articuloModel;
