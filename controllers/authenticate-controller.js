@@ -1,15 +1,16 @@
 var express=require("express");
 var bodyParser=require('body-parser');
 var jwt=require('jsonwebtoken');
-var connection = require('./../src/db/db');
+//var connection = require('../src/db/db');
+const database = require('../src/db/db');
 module.exports.authenticate=function(req,res){
     var usuario=req.body.usuario;
     var password=req.body.password;
-    connection.query('SELECT * FROM credenciales WHERE usuario = ?',[usuario], function (error, results, fields) {
+    database.connection.query('SELECT * FROM credenciales WHERE usuario = ?',[usuario], function (error, results, fields) {
       if (error) {
           res.json({
-            status:false,
-            message:'Hay algún error con la consulta'
+            Estado:'Erróneo',
+            Mensaje:'Hay algún error con la consulta'
             })
       }else{
         if(results.length >0){
@@ -18,21 +19,21 @@ module.exports.authenticate=function(req,res){
                     expiresIn:5000
                 });
                 res.json({
-                    status:true,
-                    token:token
+                    Estado:'Verdadero',
+                    Token:token
                 })
             }else{
                 res.json({
-                  status:false,
-                  message:"El usuario y la contraseña no coinciden"
+                  Estado:'Erróneo',
+                  Mensaje:"El usuario y la contraseña no coinciden"
                  });
             }
 
         }
         else{
           res.json({
-              status:false,
-            message:"El usuario no existe"
+              Estado:'Erróneo',
+            Mensaje:"El usuario no existe"
           });
         }
       }

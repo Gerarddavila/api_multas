@@ -19,4 +19,4 @@ if(!err) {
 }
 });
 exports.connection = connection;
-module.exports =connection;
+//module.exports =connection;

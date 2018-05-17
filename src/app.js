@@ -55,11 +55,11 @@ router.get('/home',function(req,res){
     res.send('Token Verificado')
 })
 router.get('/credenciales',function(req,res){
-  
+
     res.send('Token Verificado')
 
 })
 app.listen(app.get('port'), () => {
   console.log('server on port 3000');
 });
-app.listen(8012);
+//app.listen(8012);
