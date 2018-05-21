@@ -13,8 +13,7 @@ ORDER BY COUNT(datos_vehiculo.no_placa) desc;`,
       if (err) {
         throw err;
       }else {
-        res.json({"Datos": rows});
-        //callback(null, rows);
+        callback(null, rows);
       }
     }
   )
