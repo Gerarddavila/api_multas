@@ -3,7 +3,7 @@ module.exports = function (app) {
 
   app.get('/top', (req, res) => {
       Top.getTop((err, data) => {
-      res.status(200).json(data);
+      res.status(200).json({"Datos":data});
     });
   });
 
