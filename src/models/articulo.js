@@ -3,8 +3,8 @@ const database = require ('../db/db');
 
 //--------------------Metodo para obtener datos --------------------------------
 let articuloModel = {};
-articuloModel.getArticulo = (callback) => {
 
+articuloModel.getArticulo = (callback) => {
   if (database.connection)
   {
     database.connection.query ('SELECT *  FROM articulo_infringido',
