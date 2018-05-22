@@ -3,7 +3,7 @@ module.exports = function (app) {
 
   app.get('/detalle', (req, res) => {
       Detalle.getDetalle((err, data) => {
-      res.status(200).json(data);
+      res.status(200).json({"datos":data});
     });
   });
 

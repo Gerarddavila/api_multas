@@ -5,7 +5,7 @@ module.exports = function (app)
 {
 app.get('/infraccion', (req, res) => {
 Infraccion.getInfraccion((err, data) =>{
-  res.status(200).json(data);
+  res.status(200).json({"datos":data});
 });
 
 

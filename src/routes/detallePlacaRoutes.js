@@ -3,7 +3,7 @@ module.exports = function (app) {
 
   app.get('/placa', (req, res) => {
       Placa.getPlaca((err, data) => {
-      res.status(200).json(data);
+      res.status(200).json({"datos":data});
     });
   });
 
@@ -12,7 +12,7 @@ module.exports = function (app) {
       placa: req.params.placa
     };
       Placa.getPlacaIndividual(placaData,(err, data) => {
-      res.status(200).json(data);
+      res.status(200).json({"datos":data});
     });
   });
 }

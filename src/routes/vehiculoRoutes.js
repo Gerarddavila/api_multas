@@ -12,7 +12,7 @@ module.exports = function (app) {
       id: req.params.id
     };
       Vehiculo.getVehiculoIndividual(vehiculoData,(err, data) => {
-      res.status(200).json(data);
+      res.status(200).json({"datos":data});
     });
   });
 

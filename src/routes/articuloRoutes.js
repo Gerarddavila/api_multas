@@ -5,7 +5,7 @@ module.exports = function (app)
 //-----------------------Obtener datos------------------------------------------
 app.get('/articulo', (req, res) => {
 articulo.getArticulo((err, data) =>{
-  res.status(200).json(data);
+  res.status(200).json({"datos":data});
 });
 
 

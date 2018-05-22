@@ -3,7 +3,7 @@ module.exports = function (app) {
   app.get('/credenciales', (req, res) => {
     //res.json([]);
     Credenciales.getCredenciales((err, data) => {
-      res.status(200).json(data);
+      res.status(200).json({"datos":data});
     });
   });
 

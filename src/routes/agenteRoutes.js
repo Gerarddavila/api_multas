@@ -3,7 +3,7 @@ module.exports = function (app) {
   app.get('/agente', (req, res) => {
     //res.json([]);
     Agente.getAgente((err, data) => {
-      res.status(200).json(data);
+      res.status(200).json({"datos":data});
     });
   });
 

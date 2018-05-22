@@ -9,7 +9,7 @@ module.exports = function (app) {
   app.get('/infractor', (req, res) => {
     //res.json([]);
     Infractor.getInfractor((err, data) => {
-      res.status(200).json(data);
+      res.status(200).json({"datos":data});
     });
   });
 

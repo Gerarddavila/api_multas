@@ -3,7 +3,7 @@ module.exports = function (app) {
   app.get('/privilegios', (req, res) => {
     //res.json([]);
     Privilegios.getPrivilegios((err, data) => {
-      res.status(200).json(data);
+      res.status(200).json({"datos":data});
     });
   });
 
