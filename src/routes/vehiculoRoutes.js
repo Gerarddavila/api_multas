@@ -3,7 +3,7 @@ module.exports = function (app) {
 
   app.get('/vehiculo', (req, res) => {
       Vehiculo.getVehiculo((err, data) => {
-      res.status(200).json(data);
+      res.status(200).json({"datos":data});
     });
   });
 
