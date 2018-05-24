@@ -36,7 +36,7 @@ require('./routes/detalleRoutes')(app);
 require('./routes/detallePlacaRoutes')(app);
 require('./routes/topRoutes')(app);
 require('./routes/usuarioVehiculoRoutes')(app);
-require('./v2/routes/datosRoutes')(app);
+
 require('./v2/routes/credencialesRoutes') (app);
 
 // validation middleware
