@@ -1,31 +1,31 @@
 const Datos = require('../models/datos');
 module.exports = function (app) {
 
-  app.get('/datos', (req, res) => {
+  app.get('/v2/datos', (req, res) => {
       Datos.getDatosTop((err, data) => {
       res.status(200).json({"datos":data});
     });
   });
 
-  app.get('/datos-placa/:placa', (req, res) => {
+  app.get('/v2/datos-placa/:placa', (req, res) => {
     const datosMulta ={
-      placa: req.params.id
+      placa: req.params.placa
     };
       Datos.getDatosPlaca(datosMulta,(err, data) => {
       res.status(200).json({"datos":data});
     });
   });
 
-  app.get('/datos-monto/:placa', (req, res) => {
+  app.get('/v2/datos-monto/:placa', (req, res) => {
     const datosMulta ={
-      placa: req.params.id
+      placa: req.params.placa
     };
       Datos.getDatosPlaca(datosMulta,(err, data) => {
       res.status(200).json({"datos":data});
     });
   });
 
-  app.post('/multa', (req, res) => {
+  app.post('/v2/multa', (req, res) => {
 
     const vehiculoData = {
       idmultas:null,
@@ -68,22 +68,22 @@ module.exports = function (app) {
 })
 });
 
-app.get('/usuario_vehiculo', (req, res) => {
-    Vehiculo.getVehiculo((err, data) => {
+app.get('/v2/usuario_vehiculo', (req, res) => {
+    Datos.getVehiculo((err, data) => {
     res.status(200).json({"datos":data});
   });
 });
 
-app.get('/usuario_vehiculo/:id', (req, res) => {
+app.get('/v2/usuario_vehiculo/:id', (req, res) => {
   const vehiculoData ={
     id: req.params.id
   };
-    Vehiculo.getVehiculoIndividual(vehiculoData,(err, data) => {
+    Datos.getVehiculoIndividual(vehiculoData,(err, data) => {
     res.status(200).json({"datos":data});
   });
 });
 
-app.post('/usuario_vehiculo', (req, res) => {
+app.post('/v2/usuario_vehiculo', (req, res) => {
 
   const vehiculoData = {
     id:null,
@@ -92,7 +92,7 @@ app.post('/usuario_vehiculo', (req, res) => {
     credenciales_id:req.body.credenciales_id
   };
 
-Vehiculo.insertVehiculo(vehiculoData, (err, data) => {
+Datos.insertVehiculo(vehiculoData, (err, data) => {
 if (data && data.insertId) {
   console.log(data);
 res.json ({
@@ -109,7 +109,7 @@ res.status(500).json({
 })
 });
 
-app.put('/usuario_vehiculo/:id', (req, res) => {
+app.put('/v2/usuario_vehiculo/:id', (req, res) => {
 const vehiculoData = {
 id: req.params.id,
 placa_usuario:req.body.placa_usuario,
@@ -117,7 +117,7 @@ nombre_carro:req.body.nombre_carro,
 credenciales_id:req.body.credenciales_id
 };
 
-Vehiculo.updateVehiculo(vehiculoData, (err, data) =>{
+Datos.updateVehiculo(vehiculoData, (err, data) =>{
 if (data && data.msg) {
   res.json(data)
 }  else {
@@ -131,8 +131,8 @@ if (data && data.msg) {
 });
 
 
-app.delete('/usuario_vehiculo/:id', (req, res) => {
-Vehiculo.deleteVehiculo(req.params.id, (err, data) => {
+app.delete('/v2/usuario_vehiculo/:id', (req, res) => {
+Datos.deleteVehiculo(req.params.id, (err, data) => {
 
   if (data && data.msg === 'Eliminado' || data.msg ==='No Existe') {
 res.json ({
