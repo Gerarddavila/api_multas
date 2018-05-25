@@ -1,7 +1,7 @@
 const mysql = require('mysql');
 
 var connection = mysql.createConnection({
-    host:'db-apimultas.cadrtby0rver.us-west-2.rds.amazonaws.com',
+    host:'apimultas2.cadrtby0rver.us-west-2.rds.amazonaws.com',
     user:'adminapi',
     password:'Api2018Software',
     database:'apimultas',
