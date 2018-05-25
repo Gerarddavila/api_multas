@@ -15,4 +15,3 @@ if(!err) {
 }
 });
 exports.connection = connection;
-//module.exports =connection;

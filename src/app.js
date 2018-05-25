@@ -1,13 +1,12 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const app = express();
-
 const morgan = require ('morgan');
 const bodyParser = require('body-parser');
 
 //variables
 var router=express.Router();
-var authenticateController=require('../controllers/authenticate-controller');
+var authenticateController=require('../login/login');
 process.env.SECRET_KEY="thisismysecretkey";
 //Configuracion del puerto
 
@@ -17,12 +16,21 @@ app.set('port', process.env.PORT || 3000);
 
 app.use (morgan('dev'));
 app.use (bodyParser.json());
-
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
-app.post('/api/authenticate',authenticateController.authenticate);
-app.use('/secure-api',router);
-
+app.post('/login',authenticateController.authenticate);
+/*app.use('/agente',router);
+app.use('/articulo',router);
+app.use('/credenciales',router);
+app.use('/detalle',router);
+app.use('/infraccion',router);
+app.use('/infractor',router);
+app.use('/observaciones',router);
+app.use('/placa',router);
+app.use('/privilegios',router);
+app.use('/top',router);
+app.use('/vehiculo',router);
+*/
 //routes
 require ('./routes/articuloRoutes')(app);
 require('./routes/agenteRoutes') (app);
@@ -35,11 +43,12 @@ require('./routes/vehiculoRoutes')(app);
 require('./routes/detalleRoutes')(app);
 require('./routes/detallePlacaRoutes')(app);
 require('./routes/topRoutes')(app);
-require('./routes/usuarioVehiculoRoutes')(app);
 require('./v2/routes/datosRoutes')(app);
 require('./v2/routes/credencialesRoutes') (app);
+require('./v2/routes/creRoutes') (app);
 
 // validation middleware
+
 router.use(function(req,res,next){
     var token=req.body.token || req.headers['token'];
     if(token){
@@ -54,15 +63,7 @@ router.use(function(req,res,next){
         res.send('Por favor envía un token')
     }
 })
-router.get('/home',function(req,res){
-    res.send('Token Verificado')
-})
-router.get('/credenciales',function(req,res){
 
-    res.send('Token Verificado')
-
-})
 app.listen(app.get('port'), () => {
-  console.log('server on port 3000');
+  console.log('Servidor en puerto 3000');
 });
-//app.listen(8012);

@@ -4,7 +4,6 @@ var jwt=require('jsonwebtoken');
 //var connection = require('../src/db/db');
 const database = require('../src/db/db');
 module.exports.authenticate=function(req,res){
-
     var usuario=req.body.usuario;
     var password=req.body.password;
     database.connection.query('SELECT * FROM credenciales WHERE usuario = ?',[usuario], function (error, results, fields) {

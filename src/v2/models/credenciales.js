@@ -1,4 +1,4 @@
-const database = require ('../db/db');
+const database = require ('../../db/db');
 
 let credencialesModel = {};
 
