@@ -18,6 +18,15 @@ app.get('/v2/datos-credenciales/:usuario', (req, res) => {
   });
 });
 
+
+app.get('/v2/datos-login/:usuario', (req, res) => {
+  const credencialesData ={
+    usuario: req.params.usuario
+  };
+    Credenciales.getDatosLogin(credencialesData,(err, data) => {
+    res.status(200).json(data);
+  });
+});
 ///////////
 
   app.post('/v2/credenciales', (req, res) => {

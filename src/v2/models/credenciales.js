@@ -17,6 +17,21 @@ credencialesModel.getDatosCredenciales= (credencialesData, callback) => {
   }
 };
 
+credencialesModel.getDatosLogin= (credencialesData, callback) => {
+  if (database.connection) {
+    database.connection.query(`SELECT password,privilegios_id FROM credenciales where usuario = ${database.connection.escape(credencialesData.usuario)};`,
+    (err, rows) => {
+      if (err) {
+        throw err;
+      }else {
+        callback(null, rows);
+      }
+    }
+  )
+  }
+};
+
+
 
 
 
