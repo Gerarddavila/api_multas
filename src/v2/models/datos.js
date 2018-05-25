@@ -4,7 +4,7 @@ let datosModel = {};
 
 datosModel.getDatosTop = (callback) => {
   if (database.connection) {
-    database.connection.query('SELECT placa, COUNT(placa) as multas FROM apimultas2.datos GROUP BY placa ORDER BY COUNT(placa) desc;',
+    database.connection.query('SELECT placa, COUNT(placa) as multas FROM datos GROUP BY placa ORDER BY COUNT(placa) desc;',
     (err, rows) => {
       if (err) {
         throw err;
@@ -20,7 +20,7 @@ datosModel.getDatosTop = (callback) => {
 
 datosModel.getDatosPlaca= (datosMulta, callback) => {
   if (database.connection) {
-    database.connection.query(`SELECT nombres,apellidos,lugar_infraccion, fecha,monto FROM apimultas2.datos WHERE placa=${database.connection.escape(datosMulta.placa)};`,
+    database.connection.query(`SELECT nombres,apellidos,lugar_infraccion, fecha,monto FROM datos WHERE placa=${database.connection.escape(datosMulta.placa)};`,
     (err, rows) => {
       if (err) {
         throw err;
