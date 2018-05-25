@@ -5,6 +5,20 @@ let credencialesModel = {};
 
 credencialesModel.getDatosCredenciales= (credencialesData, callback) => {
   if (database.connection) {
+    database.connection.query(`SELECT * FROM credenciales where usuario = ${database.connection.escape(credencialesData.usuario)};`,
+    (err, rows) => {
+      if (err) {
+        throw err;
+      }else {
+        callback(null, rows);
+      }
+    }
+  )
+  }
+};
+
+credencialesModel.getDatosLogin= (credencialesData, callback) => {
+  if (database.connection) {
     database.connection.query(`SELECT password,privilegios_id FROM credenciales where usuario = ${database.connection.escape(credencialesData.usuario)};`,
     (err, rows) => {
       if (err) {
@@ -16,6 +30,7 @@ credencialesModel.getDatosCredenciales= (credencialesData, callback) => {
   )
   }
 };
+
 
 
 
