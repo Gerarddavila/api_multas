@@ -1,4 +1,5 @@
 const Credenciales = require('../models/credenciales');
+
 module.exports = function (app) {
   app.get('/v2/credenciales', (req, res) => {
     //res.json([]);
@@ -18,10 +19,6 @@ app.get('/v2/datos-credenciales/:usuario', (req, res) => {
 });
 
 ///////////
-
-
-
-
 
   app.post('/v2/credenciales', (req, res) => {
     //console.log(req, body);
