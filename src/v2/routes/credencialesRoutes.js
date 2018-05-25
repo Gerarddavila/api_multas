@@ -24,7 +24,7 @@ app.get('/v2/datos-login/:usuario', (req, res) => {
     usuario: req.params.usuario
   };
     Credenciales.getDatosLogin(credencialesData,(err, data) => {
-    res.status(200).json();
+    res.status(200).json(data);
   });
 });
 ///////////
