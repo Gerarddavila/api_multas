@@ -1,9 +1,9 @@
 const mysql = require('mysql');
 
 var connection = mysql.createConnection({
-    host:'db-apimultas.cadrtby0rver.us-west-2.rds.amazonaws.com',
-    user:'adminapi',
-    password:'Api2018Software',
+    host:'nombre_base_de_datos',
+    user:'usuario_base_de_datos',
+    password:'password_base_de_datos',
     database:'apimultas',
     port: '3306'
 });
